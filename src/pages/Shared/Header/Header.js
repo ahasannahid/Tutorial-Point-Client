@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -8,10 +8,11 @@ import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SideNav from '../SideNav/SideNav';
-
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const Header = () => {
-    const { user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     console.log(user);
     const handleLogOut = () => {
         logOut()
@@ -20,6 +21,9 @@ const Header = () => {
                 console.error(error)
             })
     }
+
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
 
     return (
         <Navbar className='mb-4' collapseOnSelect expand="lg" bg="light" variant="light">
@@ -46,13 +50,13 @@ const Header = () => {
                                     </>
                             }
                         </Nav.Link>
-                        <Nav.Link>
-                            {user?.photoURL? 
-                            <Image 
-                            style={{height: '30px'}} roundedCircle src={user?.photoURL}>
-                            </Image> 
-                            : 
-                            <FaUser></FaUser>
+                        <Nav.Link to='/' data-toggle='tooltip' data-placement='bottom' title={user?.displayName}>
+                            {user?.photoURL ?
+                                    <Image
+                                        style={{ height: '30px' }} roundedCircle src={user?.photoURL}>
+                                    </Image>
+                                :
+                                <FaUser></FaUser>
                             }
                         </Nav.Link>
 
