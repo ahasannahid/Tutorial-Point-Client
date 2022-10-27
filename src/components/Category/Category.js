@@ -10,8 +10,6 @@ const Category = () => {
                 categoryCourses.map(course => <Course
                     key={course._id} course={course}></Course>)
             }
-
-
         </div>
     );
 };
