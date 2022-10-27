@@ -18,9 +18,6 @@ const Main = () => {
                     <Col lg= "7">
                         <Outlet></Outlet>
                     </Col>
-                    <Col lg="2" className='d-none d-lg-block'>
-                        <RightNav></RightNav>
-                    </Col>
                 </Row>
             </Container>
         </div>
