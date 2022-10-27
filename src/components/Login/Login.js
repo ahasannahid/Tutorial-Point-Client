@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -28,7 +28,7 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 form.reset();
                 setError(' ')
                 navigate(from, { replace: true });
@@ -40,16 +40,27 @@ const Login = () => {
             )
     }
     
-    const googleProvider = new GoogleAuthProvider()
+    const googleProvider = new GoogleAuthProvider();
     const handleGoogleSIgnIn = () => {
         providerLogin(googleProvider)
         .then(result => {
             const user = result.user;
-            console.log(user);
+            // console.log(user);
+            navigate(from, { replace: true });
         })
         .catch(error => console.error(error))
     }
 
+    const gitHubProvider = new GithubAuthProvider();
+    const handleGitHubSIgnIn = () => {
+        providerLogin(gitHubProvider)
+        .then(result => {
+            const user = result.user;
+            // console.log(user);
+            navigate(from, { replace: true });
+        })
+        .catch(error => console.error(error))
+    }
 
     return (
         <div>
@@ -77,7 +88,7 @@ const Login = () => {
             <div className='text-center mt-3'>
                 <ButtonGroup vertical>
                     <Button onClick={handleGoogleSIgnIn} className='mb-2' variant='outline-primary'><FaGoogle></FaGoogle>  Login with google</Button>
-                    <Button variant='outline-dark'><FaGithub></FaGithub> Login with github</Button>
+                    <Button onClick={handleGitHubSIgnIn} variant='outline-dark'><FaGithub></FaGithub> Login with github</Button>
                 </ButtonGroup>
             </div>
         </div>

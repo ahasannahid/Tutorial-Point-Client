@@ -4,16 +4,18 @@ import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { FaUser } from 'react-icons/fa';
+import { FaUser} from 'react-icons/fa';
+
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import SideNav from '../SideNav/SideNav';
-import Overlay from 'react-bootstrap/Overlay';
-import Tooltip from 'react-bootstrap/Tooltip';
+
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user);
+    
+    const [darkMode, setDarkMode] = useState(false);
+
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -21,9 +23,6 @@ const Header = () => {
                 console.error(error)
             })
     }
-
-    const [show, setShow] = useState(false);
-    const target = useRef(null);
 
     return (
         <Navbar className='mb-4' collapseOnSelect expand="lg" bg="light" variant="light">
@@ -33,6 +32,8 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
                         <Nav.Link> <Link to='/'>Courses</Link></Nav.Link>
+                        <Nav.Link> <Link to='/faq'>FAQ</Link></Nav.Link>
+                        <Nav.Link> <Link to='/blog'>Blog</Link></Nav.Link>
 
                     </Nav>
                     <Nav>
@@ -41,12 +42,12 @@ const Header = () => {
                                 user?.uid ?
                                     <>
                                         <span>{user?.displayName}</span>
-                                        <Button onClick={handleLogOut} variant="light">Logout</Button>
+                                        <Button onClick={handleLogOut} variant="light" className='mx-2'>Logout</Button>
                                     </>
                                     :
                                     <>
-                                        <Link to='/login'>Login</Link>
-                                        <Link to='/register'>Register</Link>
+                                        <Link to='/login' className='mx-2'>Login</Link>
+                                        <Link to='/register'className='mx-2'>Register</Link>
                                     </>
                             }
                         </Nav.Link>
@@ -61,6 +62,19 @@ const Header = () => {
                         </Nav.Link>
 
                     </Nav>
+
+                    {
+                               darkMode ?
+                                    <>
+                                        
+                                        <Button onClick={() => setDarkMode(!darkMode)} variant="light">Dark</Button>
+                                    </>
+                                    :
+                                    <>
+                                        <Button onClick={() => setDarkMode(!darkMode)} variant="light">Light</Button>
+                                    </>
+                            }
+                    
 
 
                     <div className='d-lg-none'>
