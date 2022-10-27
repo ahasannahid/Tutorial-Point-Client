@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 const COurseDetails = () => {
     const course = useLoaderData();
 
-    const { course_title, image_url, course_details, instructor, total_enrole } = course;
+    const { course_title, image_url, course_details, instructor, total_view,rating } = course;
     return (
         <Card className='me-5  mb-4'>
             <Card.Title className='text-center'>{course_title}</Card.Title>
@@ -26,7 +26,8 @@ const COurseDetails = () => {
                     </div>
                 </div>
                 <div className='text-center'>
-                    <p>Total Enrole: {total_enrole}</p>
+                    <p>Rating: {rating.number}</p>
+                    <p>Total View: {total_view}</p>
                 </div>
             </Card.Footer>
             <Button variant='outline-dark'>Get Premium Access</Button>
