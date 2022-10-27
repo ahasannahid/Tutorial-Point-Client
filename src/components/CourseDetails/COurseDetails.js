@@ -10,7 +10,7 @@ const COurseDetails = () => {
     const course = useLoaderData();
     const ref = React.createRef();
 
-    const { course_title, image_url, course_details, instructor, total_view, rating } = course;
+    const {_id, course_title, image_url, course_details, instructor, total_view, rating } = course;
     return (
 
         <div>
@@ -45,7 +45,7 @@ const COurseDetails = () => {
                     {({ toPdf }) => <Button onClick={toPdf} className='bg-light text-dark fw-bold'><FaDownload></FaDownload> Download PDF</Button>}
                 </Pdf>
 
-                <Link to='/checkout' className='text-center'><Button className='bg-warning fw-bold' variant='outline-primary'>Get Premium Access</Button></Link>
+                <Link to={`/checkout/${_id}`} className='text-center'><Button className='bg-warning fw-bold' variant='outline-primary'>Get Premium Access</Button></Link>
             </div>
         </div>
 
