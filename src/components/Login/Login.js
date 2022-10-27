@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -14,7 +15,7 @@ const Login = () => {
     const [error, setError] = useState(' ')
     const navigate = useNavigate();
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/'
@@ -37,6 +38,16 @@ const Login = () => {
                 setError(error.message)
             }
             )
+    }
+    
+    const googleProvider = new GoogleAuthProvider()
+    const handleGoogleSIgnIn = () => {
+        providerLogin(googleProvider)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
     }
 
 
@@ -65,7 +76,7 @@ const Login = () => {
             <p>If you haven't an account please <Link to='/register'>Register</Link></p>
             <div className='text-center mt-3'>
                 <ButtonGroup vertical>
-                    <Button className='mb-2' variant='outline-primary'><FaGoogle></FaGoogle>  Login with google</Button>
+                    <Button onClick={handleGoogleSIgnIn} className='mb-2' variant='outline-primary'><FaGoogle></FaGoogle>  Login with google</Button>
                     <Button variant='outline-dark'><FaGithub></FaGithub> Login with github</Button>
                 </ButtonGroup>
             </div>
