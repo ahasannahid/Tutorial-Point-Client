@@ -6,8 +6,10 @@ const Checkout = () => {
     const { course_title, image_url, course_details, instructor, total_view, rating } = course;
     
     return (
-        <div>
-            <h1>this is checkout {course_title}</h1>
+        <div className='text-center'>
+            <h3>You got premioum access for {course_title} course</h3>
+            <p>Your instructor is {instructor.name}</p>
+            <p className='text-success'>COngratulations!! Successfully You got premioum access</p>
         </div>
     );
 };

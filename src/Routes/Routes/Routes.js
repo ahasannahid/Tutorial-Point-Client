@@ -49,7 +49,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <Checkout></Checkout>,
+                element: <PrivateRoute>
+                    <Checkout></Checkout>
+                </PrivateRoute>,
                 loader: ({params}) => fetch(`https://tutorials-point-server-site.vercel.app/courses/${params.id}`)
             }
         ]
